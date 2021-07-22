@@ -4,20 +4,29 @@ using namespace std;
 
 queue<int> pushStat(int speed);
 int setSpeed();
-int countPlayers();
+int addPlayers();
 
 class Player {				// Player Class
 public:
 	int speed;
+	int name;
 	queue<int> playerQ;
 
 public:
-	Player() {				// 생성자
-		speed = setSpeed();
-		cout << addPlayers() << "번째 player's speed : " << speed << endl;
+	Player() : speed(setSpeed()), name(addPlayers()) {				// 생성자
+		cout << name << "번째 player's speed : " << speed << endl;
 		playerQ = pushStat(speed);
-	}
+	}	
 };
+
+int findName(int speed, Player* player, int playerNum) {
+
+	for (int i = 0; i < playerNum; i++) {
+		if (player[i].speed == speed)
+			return player[i].name;
+	}
+	return 0;
+}
 
 int addPlayers() {
 	static int players = 1;
@@ -46,7 +55,7 @@ int setSpeed() {	// 2 ~ 11
 		}
 	}
 	numbers.push_back(_speed);
-	//int speed = _speed;
+
 	return _speed;
 }
 
@@ -65,7 +74,10 @@ int main() {
 	cin >> playerNum;
 
 	Player* player = new Player[playerNum];	// Player 생성
+
+	cout << endl;
 	playOrder(player, playerNum);
+	cout << endl;
 
 	cout << "---------------------" << endl;
 	cout << "--실행을 종료합니다--" << endl;
@@ -106,7 +118,7 @@ void playOrder(Player* player, int playerNum) {
 			}
 		}
 		while (!orderQ.empty()) {
-			cout << orderQ.top() << "'s turn " << endl;
+			cout << findName(orderQ.top(), player, playerNum) << "번째 player의 turn입니다. (speed : " << orderQ.top() << ")" << endl;
 			orderQ.pop();
 		}
 	}
