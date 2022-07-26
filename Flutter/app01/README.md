@@ -3,7 +3,7 @@ in 🐢 [Inflearn](https://www.inflearn.com/course/flutter-netflix-clone-app/das
 
 ---
 
-###session00. netflix UI 개발하기
+<h3>session00. netflix UI 개발하기</h3>
 
 - Stateless Widget vs Stateful Widget : 위젯 상호작용의 유무성
 - Scaffold : 발판, 빈페이지 제공
