@@ -1,10 +1,47 @@
+import 'package:app01/widget/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import '../model/model_movie.dart';
 
 class HomeScreen extends StatefulWidget{
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // 영화 더미 데이터 생성
+  List<Movie> movies = [
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': false
+    }),
+    Movie.fromMap({
+      'title': '사랑의 불시착',
+      'keyword': '사랑/로맨스/판타지',
+      'poster': 'test_movie_1.png',
+      'like': true
+    })
+  ];
+  
   @override
   void initState(){
     super.initState();
@@ -12,7 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context){
-    return TopBar();
+    return ListView(children: <Widget>[
+      Stack(children: <Widget>[
+        // 순서대로 위젯이 깔리게 됨
+        CarouselImage(movies: movies),
+        TopBar(),
+      ],)
+    ],);
   }
 }
 
