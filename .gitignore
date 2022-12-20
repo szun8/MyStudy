@@ -1,2 +1,16 @@
 turnGame/
 *.gradle
+*.asset
+*.json
+*.meta
+AntCompany/
+2DGameBasic01/
+Unity/My project/Library/
+Unity/My project/Logs/
+Unity/My project/UserSettings/
+Unity/My project/obj/
+Unity/My project/ProjectSettings/
+Unity/AntCompany.zip
+Unity/My project/.vs/My project/xs/UserPrefs.xml
+Unity/My project/.vsconfig
+Unity/My project/Assembly-CSharp.csproj
