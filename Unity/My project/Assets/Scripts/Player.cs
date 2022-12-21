@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     private float speed = 3;
     private float horizontal;
+    public bool isDie = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -20,10 +21,19 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>(); // 이동 이미지 좌우반전 적
     }
 
-    // Update is called once per frame
-    void Update(){
+    // FixedUpdate() : 프레임의 영향을 받지 고 일정간격으로 호출 
+    void FixedUpdate(){
         horizontal = Input.GetAxis("Horizontal");
-        PlayerMove();
+
+        if (GameManager.Instance.stopTrigger)
+        {   // 죽지 않았으면
+            animator.SetTrigger("start");
+            PlayerMove();
+        }
+
+        if (!GameManager.Instance.stopTrigger)  // 죽었다면
+            animator.SetTrigger("dead");
+
         ScreenChk();
     }
 

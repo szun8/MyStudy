@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3077124098397184050}
   m_Layer: 0
   m_Name: poop
-  m_TagString: Untagged
+  m_TagString: poop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 8552687000387739295}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a3f58a3afecdd4a9da6870797d6e2c9e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5cdee2bcb7ac040d78b0fa83a31eedba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,7 +118,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05ed1512115e457ba3159432d65ebd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
