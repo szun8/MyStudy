@@ -8,16 +8,18 @@ public class BGScroller : MonoBehaviour
 
     public float speed;
     private float offset;
+    private Player player;
 
     void Start()
     {
         render = GetComponent<MeshRenderer>();
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        offset += Time.deltaTime * speed;
+        offset += player.horizontal * speed * 0.1f;
         render.material.mainTextureOffset = new Vector2(offset , 0);
     }
 }
