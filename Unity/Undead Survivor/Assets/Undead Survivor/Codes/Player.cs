@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public float speed;
     public Scanner scanner;
+    public Hand[] hands;
 
     Rigidbody2D rigid;
     SpriteRenderer sprite;
@@ -19,10 +20,12 @@ public class Player : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        hands = GetComponentsInChildren<Hand>(true);    // 완전 좋...다
     }
 
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;
         // 위치 이동
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec); // 현재 위치에서 어디로 얼만큼 나아가야할지 알려주는 방식
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.instance.isLive) return;
         anim.SetFloat("Speed", inputVec.magnitude);
         if (inputVec.x != 0)
         {
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (!GameManager.instance.isLive) return;
         inputVec = value.Get<Vector2>();    // 값을 가져올 때부터 normalized설정이 돼서 가져오기에 정규화 작업 코드에서 제외
     }
 }

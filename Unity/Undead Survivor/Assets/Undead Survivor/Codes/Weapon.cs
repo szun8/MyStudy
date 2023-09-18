@@ -13,16 +13,14 @@ public class Weapon : MonoBehaviour
     Player player;  // 부모 컴포넌트 가져오기
 
     private void Awake()
-    {
-        player = GetComponentInParent<Player>();
+    {   // 처음 시작할때부터 플레이어 안에 생성되지 않는다
+        player = GameManager.instance.player;
     }
 
-    void Start()
-    {
-        Init(); 
-    }
     void Update()
     {
+        if (!GameManager.instance.isLive) return;   // 시간이 0배속 처리가 되었으면 모든 활동 중지
+
         switch (id)
         {
             case 0:
@@ -47,10 +45,31 @@ public class Weapon : MonoBehaviour
 
         if(id == 0)
             Batch();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init()
-    {
+    public void Init(ItemData data)
+    {   // Item.cs에서 호출되는 함수
+        // Basic Set
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero; // player안에서의 위치를 설정하기에 localPos!
+
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for(int i=0; i < GameManager.instance.pool.prefabs.Length; i++)
+        {
+            if(data.projectile == GameManager.instance.pool.prefabs[i])
+            {   // prefab 등록을 해놓은 것과 현재 데이터가 같으면 
+                prefabId = i;
+                break;
+            }
+        }
+
         // 무기ID에 따라 로직을 분리할 switch문
         switch (id)
         {
@@ -62,6 +81,15 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f;   // 원거리 무기
                 break;
         }
+
+        // Hand Set
+        Hand hand = player.hands[(int)data.itemType];   // 0번이면 근접, 1번이면 원거리
+        hand.spriter.sprite = data.hand;    // 무기 장착
+        hand.gameObject.SetActive(true);    // 무기 활성화   
+
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        // player가 가지고 있는 모든 Gear에 대해 해당 함수를 실행시켜줘, 근데 자식중에 이 함수를 실행시킬 컴포넌트가 없으면 그거 무시하고 다음으로 넘어가
     }
      
     void Batch()

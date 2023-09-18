@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive) return;   // 시간이 0배속 처리가 되었으면 모든 활동 중지 
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;   // knockBack()을 위해 hit됐을때는 잠시 움직임을 멈춰줌
 
         Vector2 dirVec = target.position - rigid.position;  // 위치차이
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.instance.isLive) return;   // 시간이 0배속 처리가 되었으면 모든 활동 중지
         if (!isLive) return;
 
         sprite.flipX = target.position.x < rigid.position.x;    // 내가 플레이어(타겟)보다 오른쪽에 있으면 flip하고 왼쪽에 있으면 flip하지 말아라!

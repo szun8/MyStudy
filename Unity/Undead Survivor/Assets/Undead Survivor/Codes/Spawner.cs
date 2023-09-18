@@ -19,6 +19,8 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive) return;   // 시간이 0배속 처리가 되었으면 소환 타이밍을 멈추기
+
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length-1);
         // 소수점 버리고 int화, 시간이 지날수록 설정된 레벨보다 큰 숫자로 가면 가져올 데이터가 없어서 에러가 발생하므로 에러 방지 min 설저
