@@ -3,14 +3,16 @@ turnGame/
 *.asset
 *.json
 *.meta
+*.log
+*.vsconfig
+
 AntCompany/
 2DGameBasic01/
 Unity/My project/Library/
-Unity/My project/Logs/
 Unity/My project/UserSettings/
 Unity/My project/obj/
 Unity/My project/ProjectSettings/
 Unity/AntCompany.zip
 Unity/My project/.vs/My project/xs/UserPrefs.xml
-Unity/My project/.vsconfig
 Unity/My project/Assembly-CSharp.csproj
+Unity/Create with Code/Prototype 1/Library/
